@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { getProducts } from "@/services/products/productService";
+import { findAllProducts } from "@/modules/products/repository/productRepository";
 
 export async function GET(){
     try{
-        const products = await getProducts()
+        const products = await findAllProducts()
         return NextResponse.json(products)
     }catch(error){
         return NextResponse.json({

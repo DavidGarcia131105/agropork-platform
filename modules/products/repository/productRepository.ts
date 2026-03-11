@@ -1,7 +1,9 @@
 import { supabase } from "@/lib/supabaseClient";
-import { Product } from "@/types/product";
+import { Product } from "@/modules/products/domain/product";
 
-export async function getProducts():Promise<Product[]> {
+//Unico lugar donde se habla con la bd
+
+export async function findAllProducts():Promise<Product[]> {
     
     const {data,error} = await supabase
     .from('products')
