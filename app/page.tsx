@@ -1,26 +1,20 @@
-"use client";
+import { getProducts } from "@/services/products/productService"
 
-import { useEffect } from "react";
-import { supabase } from "@/lib/supabaseClient";
+export default async function Home() {
 
-export default function Home() {
-
-  useEffect(() => {
-    const test = async () => {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*");
-
-      console.log(data);
-      console.log(error);
-    };
-
-    test();
-  }, []);
+  const products = await getProducts()
 
   return (
     <main>
-      <h1>Agropork Platform</h1>
+      <h1>Agropork Products</h1>
+
+      {products.map(product => (
+        <div key={product.id}>
+          <h3>{product.name}</h3>
+          <p>{product.description}</p>
+          <p>{product.price} $</p>
+        </div>
+      ))}
     </main>
-  );
+  )
 }
